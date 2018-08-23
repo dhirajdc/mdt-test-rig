@@ -17,8 +17,8 @@ public class DBConnection {
             ps = con.prepareStatement("insert into parameters values(?,?)");
             stmt = con.createStatement();
             int runid = 1;
-            String primScript = "./uov_prim_";
-            String testScript = "./uov_test_";
+            String primScript = "/home/mdt-worker/poc/work/uov_prim_";
+            String testScript = "/home/mdt-worker/poc/work/uov_test_";
 
             rs = stmt.executeQuery("select * from tr_details where runid = "+runid);
             while(rs.next()){
