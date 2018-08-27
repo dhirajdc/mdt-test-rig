@@ -22,7 +22,7 @@ public class TriggerUovRun {
 
             while(rs.next()){
                 String[] runids = rs.getString("runid").split(",");
-                String[] uovList = rs.getString("uovid").split(",");
+                String[] uovList = rs.getString("uovlist").split(",");
                 for (String runid:runids) {
                     for (String uov : uovList) {
                         String primScript = "./Uov_Primary_";
