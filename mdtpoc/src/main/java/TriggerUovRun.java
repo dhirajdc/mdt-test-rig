@@ -1,5 +1,8 @@
 import java.io.IOException;
 import java.sql.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class TriggerUovRun {
 
@@ -25,8 +28,8 @@ public class TriggerUovRun {
                 String[] uovList = rs.getString("uovlist").split(",");
                 for (String runid:runids) {
                     for (String uov : uovList) {
-                        String primScript = "./Uov_Primary_";
-                        String testScript = "./Uov_Test_";
+                        String primScript = "/home/mdt-worker/poc/work/Uov_Primary_";
+                        String testScript = "/home/mdt-worker/poc/work/Uov_Test_";
 
                         primScript = primScript + uov + ".sh";
                         System.out.println(primScript + "\n");
@@ -51,12 +54,25 @@ public class TriggerUovRun {
     public static void triggerScript(String scriptName, String parameter){
         //String[] cmdScript = new String[]{"/bin/bash", scriptName};
         String[] cmdScript = {scriptName, parameter};
+
+
         try {
-            System.out.println("Executing the script " + scriptName);
-            Runtime.getRuntime().exec(cmdScript);
+            System.out.println("Executing the script " + cmdScript[0] + " " + cmdScript[1]);
+            Process proc = Runtime.getRuntime().exec(cmdScript);
+            BufferedReader read = new BufferedReader(new InputStreamReader(
+                    proc.getInputStream()));
+            try {
+                proc.waitFor();
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+            while (read.ready()) {
+                System.out.println(read.readLine());
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
+
 
     }
 
