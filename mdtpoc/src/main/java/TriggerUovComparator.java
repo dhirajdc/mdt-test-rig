@@ -43,7 +43,6 @@ public class TriggerUovComparator {
                     compScript = compScript + uov + ".sh";
                     triggerScript(compScript, runid);
                     System.out.println(compScript+"\n");
-                    Thread.sleep(30000);
                     ps = con.prepareStatement("truncate table parameters");
                     ps.executeUpdate();
 
