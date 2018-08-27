@@ -22,7 +22,7 @@ pipeline {
        stage('Compare Results') {
            steps {
                echo 'Comparing final Result...'
-               sh '/home/mdt-worker/poc/work/runComparator.sh
+               sh '/home/mdt-worker/poc/work/runComparator.sh'
            }
        }
    }
