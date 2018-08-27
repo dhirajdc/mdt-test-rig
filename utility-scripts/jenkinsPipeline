@@ -13,16 +13,16 @@ pipeline {
                sh '/home/mdt-worker/poc/work/deployNotebook.sh'
            }
        }
-       stage('Run') {
+       stage('Run Test Rig') {
            steps {
                echo 'Running Primary and Test Code...'
-               sh '/home/mdt-worker/poc/work/run.sh'
+               sh '/home/mdt-worker/poc/work/runProgram.sh'
            }
        }
-       stage('Compare') {
+       stage('Compare Results') {
            steps {
                echo 'Comparing final Result...'
-               sh '/home/mdt-worker/poc/work/comparator_1_1.sh'
+               sh '/home/mdt-worker/poc/work/runComparator.sh
            }
        }
    }
