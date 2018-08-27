@@ -24,7 +24,7 @@ public class Uov_Test_1 {
             inputTable = inputTable + runId + "_" + uovId;
 
             System.out.println(inputTable);
-            outputTable = outputTable +"_" + "test_" + uovId ;
+            outputTable = outputTable + "test_" + uovId ;
 
             selectSql = String.format("select city, count(*) as count from %s  where city != 'Jacksonville' group by city", inputTable);
             rs = stmt.executeQuery(selectSql);
@@ -32,9 +32,9 @@ public class Uov_Test_1 {
             while(rs.next()) {
                 String city= rs.getString("city");
                 String count = rs.getString("count");
-                String insertSql = "insert into " + outputTable + " (city, count, runid) values (" + city + " ,"
-                        + count + "," + runId + ")";
-
+                String insertSql = "insert into " + outputTable + " (city, count, runid) values (" + "\"" + city + "\"" + " ,"
+                        + count + "," + "\"" + runId + "\"" + ")";
+                System.out.println("Executing statement : " + insertSql);
                 ps = con.prepareStatement(insertSql);
                 ps.executeUpdate();
             }

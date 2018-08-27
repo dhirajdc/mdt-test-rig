@@ -24,16 +24,16 @@ public class Uov_Primary_2 {
             inputTable = inputTable + runId + "_" + uovId;
 
             System.out.println(inputTable);
-            outputTable = outputTable +"_" + "primary_" + uovId ;
+            outputTable = outputTable + "primary_" + uovId ;
 
-            selectSql = String.format("select city, sum(mediacost) as cost from %s group by city)", inputTable);
+            selectSql = String.format("select city, sum(mediacost) as cost from %s group by city", inputTable);
             rs = stmt.executeQuery(selectSql);
 
             while(rs.next()) {
                 String city= rs.getString("city");
                 String cost = rs.getString("cost");
-                String insertSql = "insert into " + outputTable + " (city, cost, runid) values (" + city + " ,"
-                        + cost + "," + runId + ")";
+                String insertSql = "insert into " + outputTable + " (city, cost, runid) values (" + "\"" + city + "\"" + " ,"
+                        + cost + "," + "\"" + runId + "\"" + ")";
 
                 ps = con.prepareStatement(insertSql);
                 ps.executeUpdate();

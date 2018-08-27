@@ -24,16 +24,20 @@ public class Uov_Test_2 {
             inputTable = inputTable + runId + "_" + uovId;
 
             System.out.println(inputTable);
-            outputTable = outputTable +"_" + "test_" + uovId ;
+            outputTable = outputTable + "test_" + uovId ;
 
-            selectSql = String.format("select city, sum(mediacost) as cost from %s  where city != 'Jacksonville' group by city)", inputTable);
+            selectSql = String.format("select city, sum(mediacost) as cost from %s  where city != 'Jacksonville' group by city", inputTable);
+            System.out.println(selectSql);
             rs = stmt.executeQuery(selectSql);
 
             while(rs.next()) {
                 String city= rs.getString("city");
                 String cost = rs.getString("cost");
-                String insertSql = "insert into " + outputTable + " (city, cost, runid) values (" + city + " ,"
-                        + cost + "," + runId + ")";
+
+                String insertSql = "insert into " + outputTable + " (city, cost, runid) values (" + "\"" + city + "\"" + " ,"
+                        + cost + "," + "\"" + runId + "\"" + ")";
+
+                System.out.println("Executing statement : " + insertSql);
 
                 ps = con.prepareStatement(insertSql);
                 ps.executeUpdate();
