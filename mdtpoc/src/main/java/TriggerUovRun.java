@@ -28,13 +28,13 @@ public class TriggerUovRun {
                         String primScript = "./Uov_Primary_";
                         String testScript = "./Uov_Test_";
 
-                        primScript = primScript + uov + ".sh" + " " + runid;
+                        primScript = primScript + uov + ".sh";
                         System.out.println(primScript + "\n");
-                        triggerScript(primScript);
+                        triggerScript(primScript, runid);
 
-                        testScript = testScript + uov + ".sh" + " " + runid;
+                        testScript = testScript + uov + ".sh" ;
                         System.out.println(testScript + "\n");
-                        triggerScript(testScript);
+                        triggerScript(testScript, runid);
                     }
                 }
 
@@ -48,8 +48,9 @@ public class TriggerUovRun {
         }
     }
 
-    public static void triggerScript(String scriptName){
-        String[] cmdScript = new String[]{"/bin/bash", scriptName};
+    public static void triggerScript(String scriptName, String parameter){
+        //String[] cmdScript = new String[]{"/bin/bash", scriptName};
+        String[] cmdScript = {scriptName, parameter};
         try {
             System.out.println("Executing the script " + scriptName);
             Runtime.getRuntime().exec(cmdScript);
