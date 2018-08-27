@@ -24,14 +24,16 @@ public class TriggerUovComparator {
 
 
             while (rs.next()) {
-                String[] uovList = rs.getString(3).split(",");
+                String[] uovList = rs.getString("uovlist").split(",");
                 String runid = rs.getString("runid");
 
-                ps = con.prepareStatement("insert into parameters values(?)");
-                ps.setString(1, runid);
-                ps.executeUpdate();
 
                 for (String uov : uovList) {
+                    ps = con.prepareStatement("insert into parameters values(?, ?)");
+                    ps.setString(1, runid);
+                    ps.setString(2, uov);
+                    ps.executeUpdate();
+
                     //int returnCode = ps.executeUpdate("truncate table parameters");
                     //if (returnCode == 0) {
                     String compScript = "/home/mdt-worker/poc/work/Uov_Comparator_";
@@ -42,12 +44,12 @@ public class TriggerUovComparator {
                     triggerScript(compScript, runid);
                     System.out.println(compScript+"\n");
                     Thread.sleep(30000);
+                    ps = con.prepareStatement("truncate table parameters");
+                    ps.executeUpdate();
 
                     //}
                 }
 
-                ps = con.prepareStatement("truncate table parameters");
-                ps.executeUpdate();
             }
 //            int returnCode = ps.executeUpdate("truncate table parameters");
             con.close();
