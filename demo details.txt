@@ -1,0 +1,42 @@
+commands to starts services
+------------------------------------
+service mysql status
+systemctl status jenkins
+~/Softwares/zeppelin-0.7.3-bin-all/bin/zeppelin.sh start/stop/restart
+
+
+installation directories
+----------------------------------------------
+Zeppelin : ~/Softwares/zeppelin-0.7.3-bin-all/bin
+mysql : /etc/mysql
+jenkins : /var/lib/jenkins 
+
+
+code checkout location:
+-----------------------
+/home/mdt-worker/IdeaProjects/mdtpoc
+
+
+mysql credentails
+-------------------
+root/zim
+
+
+jenkins
+----------------------
+http://127.0.0.1:9090
+user/pass: mdt-poc/zim
+
+
+zeppeline
+------------
+no credentails
+url: http://127.0.0.1:8080
+
+git credentials:
+--------------
+git project:  mdt-test-rig
+
+user: dhirajc@zimetrics.com
+pass: Dhirajk@123
+
